@@ -1,4 +1,4 @@
 # Kommunalka
 pet project for flat payments 
 
-## devolpment in progress
+## development in progress
