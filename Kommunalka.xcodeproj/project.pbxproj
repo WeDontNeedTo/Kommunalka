@@ -11,6 +11,14 @@
 		A23E6C6028425AF00026C6F6 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A23E6C5F28425AF00026C6F6 /* ContentView.swift */; };
 		A23E6C6228425AF70026C6F6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A23E6C6128425AF70026C6F6 /* Assets.xcassets */; };
 		A23E6C6528425AF70026C6F6 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A23E6C6428425AF70026C6F6 /* Preview Assets.xcassets */; };
+		A23E6C6D28426DE90026C6F6 /* PaymentsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = A23E6C6C28426DE90026C6F6 /* PaymentsList.swift */; };
+		A23E6C7028426E550026C6F6 /* PaymentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A23E6C6F28426E550026C6F6 /* PaymentModel.swift */; };
+		A23E6C7228426ECB0026C6F6 /* PaymentRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = A23E6C7128426ECB0026C6F6 /* PaymentRow.swift */; };
+		A23E6C74284273D20026C6F6 /* EditingPaymentForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = A23E6C73284273D20026C6F6 /* EditingPaymentForm.swift */; };
+		A297ED7C2845066B003D7E1D /* PaymentRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = A297ED7B2845066B003D7E1D /* PaymentRepository.swift */; };
+		A297ED7F28450A6E003D7E1D /* PaymentsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A297ED7E28450A6E003D7E1D /* PaymentsViewModel.swift */; };
+		A297ED8228450F1F003D7E1D /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A297ED8128450F1F003D7E1D /* Constants.swift */; };
+		A297ED84284522CD003D7E1D /* SumPayCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = A297ED83284522CC003D7E1D /* SumPayCard.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +27,14 @@
 		A23E6C5F28425AF00026C6F6 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		A23E6C6128425AF70026C6F6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A23E6C6428425AF70026C6F6 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		A23E6C6C28426DE90026C6F6 /* PaymentsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentsList.swift; sourceTree = "<group>"; };
+		A23E6C6F28426E550026C6F6 /* PaymentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentModel.swift; sourceTree = "<group>"; };
+		A23E6C7128426ECB0026C6F6 /* PaymentRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentRow.swift; sourceTree = "<group>"; };
+		A23E6C73284273D20026C6F6 /* EditingPaymentForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditingPaymentForm.swift; sourceTree = "<group>"; };
+		A297ED7B2845066B003D7E1D /* PaymentRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentRepository.swift; sourceTree = "<group>"; };
+		A297ED7E28450A6E003D7E1D /* PaymentsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentsViewModel.swift; sourceTree = "<group>"; };
+		A297ED8128450F1F003D7E1D /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		A297ED83284522CC003D7E1D /* SumPayCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SumPayCard.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,8 +67,13 @@
 		A23E6C5C28425AF00026C6F6 /* Kommunalka */ = {
 			isa = PBXGroup;
 			children = (
-				A23E6C5D28425AF00026C6F6 /* KommunalkaApp.swift */,
+				A297ED8028450F17003D7E1D /* Utils */,
+				A297ED7D28450A62003D7E1D /* ViewModel */,
+				A297ED7A2845065B003D7E1D /* Repository */,
+				A23E6C6E28426E290026C6F6 /* Model */,
+				A23E6C6B28426DA20026C6F6 /* UI */,
 				A23E6C5F28425AF00026C6F6 /* ContentView.swift */,
+				A23E6C5D28425AF00026C6F6 /* KommunalkaApp.swift */,
 				A23E6C6128425AF70026C6F6 /* Assets.xcassets */,
 				A23E6C6328425AF70026C6F6 /* Preview Content */,
 			);
@@ -65,6 +86,65 @@
 				A23E6C6428425AF70026C6F6 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		A23E6C6B28426DA20026C6F6 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				A24AA2ED284A22AE00700373 /* PaymentSheet */,
+				A24AA2EC284A22A100700373 /* Payments */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		A23E6C6E28426E290026C6F6 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				A23E6C6F28426E550026C6F6 /* PaymentModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		A24AA2EC284A22A100700373 /* Payments */ = {
+			isa = PBXGroup;
+			children = (
+				A297ED83284522CC003D7E1D /* SumPayCard.swift */,
+				A23E6C7128426ECB0026C6F6 /* PaymentRow.swift */,
+				A23E6C6C28426DE90026C6F6 /* PaymentsList.swift */,
+			);
+			path = Payments;
+			sourceTree = "<group>";
+		};
+		A24AA2ED284A22AE00700373 /* PaymentSheet */ = {
+			isa = PBXGroup;
+			children = (
+				A23E6C73284273D20026C6F6 /* EditingPaymentForm.swift */,
+			);
+			path = PaymentSheet;
+			sourceTree = "<group>";
+		};
+		A297ED7A2845065B003D7E1D /* Repository */ = {
+			isa = PBXGroup;
+			children = (
+				A297ED7B2845066B003D7E1D /* PaymentRepository.swift */,
+			);
+			path = Repository;
+			sourceTree = "<group>";
+		};
+		A297ED7D28450A62003D7E1D /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				A297ED7E28450A6E003D7E1D /* PaymentsViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		A297ED8028450F17003D7E1D /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				A297ED8128450F1F003D7E1D /* Constants.swift */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -104,11 +184,12 @@
 			};
 			buildConfigurationList = A23E6C5528425AF00026C6F6 /* Build configuration list for PBXProject "Kommunalka" */;
 			compatibilityVersion = "Xcode 13.0";
-			developmentRegion = en;
+			developmentRegion = ru;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 				Base,
+				ru,
 			);
 			mainGroup = A23E6C5128425AF00026C6F6;
 			productRefGroup = A23E6C5B28425AF00026C6F6 /* Products */;
@@ -137,8 +218,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A23E6C7028426E550026C6F6 /* PaymentModel.swift in Sources */,
+				A23E6C74284273D20026C6F6 /* EditingPaymentForm.swift in Sources */,
+				A297ED84284522CD003D7E1D /* SumPayCard.swift in Sources */,
+				A23E6C6D28426DE90026C6F6 /* PaymentsList.swift in Sources */,
+				A297ED7C2845066B003D7E1D /* PaymentRepository.swift in Sources */,
 				A23E6C6028425AF00026C6F6 /* ContentView.swift in Sources */,
+				A23E6C7228426ECB0026C6F6 /* PaymentRow.swift in Sources */,
 				A23E6C5E28425AF00026C6F6 /* KommunalkaApp.swift in Sources */,
+				A297ED7F28450A6E003D7E1D /* PaymentsViewModel.swift in Sources */,
+				A297ED8228450F1F003D7E1D /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -267,14 +356,16 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Kommunalka/Preview Content\"";
-				DEVELOPMENT_TEAM = 5XY4M72NS4;
+				DEVELOPMENT_TEAM = 4D6LA585PP;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -284,7 +375,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -296,14 +387,16 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Kommunalka/Preview Content\"";
-				DEVELOPMENT_TEAM = 5XY4M72NS4;
+				DEVELOPMENT_TEAM = 4D6LA585PP;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -313,7 +406,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
