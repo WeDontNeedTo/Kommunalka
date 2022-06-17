@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct PaymentRow: View {
-    let payment: PaymentModel
+    let payment: PaymentModelObject
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -45,6 +45,6 @@ struct PaymentRow: View {
 
 struct PaymentRow_Previews: PreviewProvider {
     static var previews: some View {
-        PaymentRow(payment: PaymentModel(hotWaterCount: 322, coldWaterCount: 228, electricity: 16018, date: "Май"))
+        PaymentRow(payment: PaymentModelObject(hotWaterCount: 322, coldWaterCount: 228, electricity: 16018, date: "Май"))
     }
 }

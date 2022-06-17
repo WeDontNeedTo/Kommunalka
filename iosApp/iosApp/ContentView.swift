@@ -2,7 +2,7 @@ import SwiftUI
 import PaymentKit
 
 struct ContentView: View {
-
+    
 	var body: some View {
         PaymentsList()
 	}

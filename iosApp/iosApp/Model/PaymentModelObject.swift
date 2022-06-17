@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct PaymentModel: Codable, Identifiable, Equatable {
+struct PaymentModelObject: Codable, Identifiable, Equatable {
     var id = UUID()
     var hotWaterCount: Int
     var coldWaterCount: Int

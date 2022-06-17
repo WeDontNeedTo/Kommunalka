@@ -10,11 +10,14 @@ import SwiftUI
 struct PaymentsList: View {
     @StateObject var paymentViewModel: PaymentViewModel = PaymentViewModel(paymentRepository: PaymentRepository())
     @State private var isPresented: Bool = false
+    @State private var testString: String = ""
+
     
     var body: some View {
         NavigationView {
             List {
                 Section {
+                    Text("String is \(testString)")
                     SumPayCard(
                         previousSum: $paymentViewModel.previousPay,
                         currentSum: $paymentViewModel.currentPay,
@@ -66,6 +69,9 @@ struct PaymentsList: View {
                         Label("", systemImage: "note.text.badge.plus")
                     }
                 }
+            }
+            .task {
+                debugPrint(await paymentViewModel.getTest())
             }
         }
     }

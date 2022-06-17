@@ -8,10 +8,10 @@
 import Foundation
 
 protocol PaymentRepositoryProtocol {
-    func savePayments(with model: [PaymentModel])
-    func getPayment() -> [PaymentModel]
-    func updatePayment(with paymentId: UUID, and model: PaymentModel) -> [PaymentModel]
-    func sumFor(payment: PaymentModel) -> Float
+    func savePayments(with model: [PaymentModelObject])
+    func getPayment() -> [PaymentModelObject]
+    func updatePayment(with paymentId: UUID, and model: PaymentModelObject) -> [PaymentModelObject]
+    func sumFor(payment: PaymentModelObject) -> Float
 }
 
 class PaymentRepository: PaymentRepositoryProtocol {
@@ -20,20 +20,20 @@ class PaymentRepository: PaymentRepositoryProtocol {
     private let defaults = UserDefaults()
     private let paymentKey: String = "payments"
     
-    func savePayments(with model: [PaymentModel]) {
+    func savePayments(with model: [PaymentModelObject]) {
         guard let encoded = try? PropertyListEncoder().encode(model) else { return }
         defaults.set(encoded, forKey: self.paymentKey)
     }
     
-    func getPayment() -> [PaymentModel] {
+    func getPayment() -> [PaymentModelObject] {
         if let data = defaults.data(forKey: self.paymentKey) {
-            return try! PropertyListDecoder().decode([PaymentModel].self, from: data)
+            return try! PropertyListDecoder().decode([PaymentModelObject].self, from: data)
         } else {
             return []
         }
     }
         
-    func updatePayment(with paymentId: UUID, and model: PaymentModel) -> [PaymentModel] {
+    func updatePayment(with paymentId: UUID, and model: PaymentModelObject) -> [PaymentModelObject] {
         var payments = self.getPayment()
         if let updatedIndex = payments.firstIndex(where: { $0.id == paymentId }) {
             payments[updatedIndex] = model
@@ -42,7 +42,7 @@ class PaymentRepository: PaymentRepositoryProtocol {
         return payments
     }
     
-    func sumFor(payment: PaymentModel) -> Float {
+    func sumFor(payment: PaymentModelObject) -> Float {
         (Float(payment.electricity) * Tarrif.electricityPrice) + (Float(payment.coldWaterCount) * Tarrif.coldWaterPrice) + (Float(payment.hotWaterCount) * Tarrif.hotWaterPrice)
     }
 }

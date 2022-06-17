@@ -17,8 +17,6 @@ kotlin {
         }
     }
 
-    val coroutinesVersion = "1.5.2-native-mt"
-    val serializationVersion = "1.2.2"
     val ktor_version = "2.0.2"
 
     sourceSets {
@@ -26,9 +24,8 @@ kotlin {
             dependencies {
                 implementation("io.ktor:ktor-client-core:$ktor_version")
                 implementation("io.ktor:ktor-client-logging:$ktor_version")
-//                //Coroutines
-                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.1")
-                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.1")
+                implementation("io.ktor:ktor-client-content-negotiation:$ktor_version")
+                implementation("io.ktor:ktor-serialization-kotlinx-json:$ktor_version")
             }
         }
         val commonTest by getting {
@@ -50,7 +47,9 @@ kotlin {
             iosX64Main.dependsOn(this)
             iosArm64Main.dependsOn(this)
             iosSimulatorArm64Main.dependsOn(this)
-
+            dependencies {
+                implementation("io.ktor:ktor-client-darwin:$ktor_version")
+            }
         }
         val iosX64Test by getting
         val iosArm64Test by getting
