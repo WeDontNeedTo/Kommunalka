@@ -2,6 +2,7 @@ plugins {
     kotlin("multiplatform")
     id("com.android.library")
     kotlin("plugin.serialization")
+    id("com.squareup.sqldelight")
 }
 
 kotlin {
@@ -26,6 +27,7 @@ kotlin {
                 implementation("io.ktor:ktor-client-logging:$ktor_version")
                 implementation("io.ktor:ktor-client-content-negotiation:$ktor_version")
                 implementation("io.ktor:ktor-serialization-kotlinx-json:$ktor_version")
+                implementation("com.squareup.sqldelight:runtime:1.5.3")
             }
         }
         val commonTest by getting {
@@ -36,6 +38,7 @@ kotlin {
         val androidMain by getting {
             dependencies {
                 implementation("io.ktor:ktor-client-android:$ktor_version")
+                implementation("com.squareup.sqldelight:android-driver:1.5.3")
             }
         }
         val androidTest by getting
@@ -49,6 +52,7 @@ kotlin {
             iosSimulatorArm64Main.dependsOn(this)
             dependencies {
                 implementation("io.ktor:ktor-client-darwin:$ktor_version")
+                implementation("com.squareup.sqldelight:native-driver:1.5.3")
             }
         }
         val iosX64Test by getting
@@ -69,5 +73,13 @@ android {
     defaultConfig {
         minSdk = 21
         targetSdk = 32
+    }
+}
+
+sqldelight {
+    database("KommunalkaDatabase") {
+        packageName = "com.example.kommunalkaapp.db"
+        sourceFolders = listOf("sqldelight")
+        schemaOutputDirectory = file("build/dbs")
     }
 }

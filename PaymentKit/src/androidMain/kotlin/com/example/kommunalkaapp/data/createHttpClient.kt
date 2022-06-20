@@ -1,12 +1,12 @@
-package com.example.kommunalkaapp
+package com.example.kommunalkaapp.data
 
 import io.ktor.client.*
-import io.ktor.client.engine.darwin.*
+import io.ktor.client.engine.android.*
 import io.ktor.client.plugins.contentnegotiation.*
 import io.ktor.serialization.kotlinx.json.*
 import kotlinx.serialization.json.Json
 
-internal fun IOSHttpClient() = HttpClient(Darwin) {
+internal fun AndroidHttpClient() = HttpClient(Android) {
     install(ContentNegotiation) {
         json(Json {
             prettyPrint = true
@@ -14,12 +14,12 @@ internal fun IOSHttpClient() = HttpClient(Darwin) {
         })
     }
     engine {
-        configureRequest {
-            setAllowsCellularAccess(true)
+        requestConfig.apply {
+            connectTimeout = 5
         }
     }
 }
 
 actual fun createHttpClient(): HttpClient {
-    return IOSHttpClient()
+    return AndroidHttpClient()
 }

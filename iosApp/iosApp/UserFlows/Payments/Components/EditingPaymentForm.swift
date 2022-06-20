@@ -45,7 +45,7 @@ struct EditingPaymentForm: View {
                             
                             TextField("Введите горячую воду", text: $hotWaterText)
                                 .onChange(of: hotWaterText) { newValue in
-                                    paymentViewModel.editingPayment.hotWaterCount = Int(newValue) ?? 0
+                                    paymentViewModel.editingPayment.hotWaterCount = Int32(newValue) ?? 0
                                 }
                         }
 
@@ -59,7 +59,7 @@ struct EditingPaymentForm: View {
                             
                             TextField("Введите холодную воду", text: $coldWaterText)
                                 .onChange(of: coldWaterText) { newValue in
-                                    paymentViewModel.editingPayment.coldWaterCount = Int(newValue) ?? 0
+                                    paymentViewModel.editingPayment.coldWaterCount = Int32(newValue) ?? 0
                                 }
                         }
                         
@@ -73,14 +73,16 @@ struct EditingPaymentForm: View {
                             
                             TextField("Введите электричество", text: $electricityText)
                                 .onChange(of: electricityText) { newValue in
-                                    paymentViewModel.editingPayment.electricity = Int(newValue) ?? 0
+                                    paymentViewModel.editingPayment.electricity = Int32(newValue) ?? 0
                                 }
                         }
                     }
                     
                     Section {
                         Button(action: {
-                            paymentViewModel.onPaymentDoneButtonPressed()
+                            Task {
+                                await paymentViewModel.onPaymentDoneButtonPressed()
+                            }
                             presentationMode.wrappedValue.dismiss()
                         }) {
                             Text(paymentViewModel.isEditing ? "Изменить" : "Добавить")

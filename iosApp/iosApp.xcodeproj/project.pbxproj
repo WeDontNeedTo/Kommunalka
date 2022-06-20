@@ -17,8 +17,7 @@
 		A21F6801285B7EB700FD19F5 /* PaymentRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = A21F67F5285B7EB700FD19F5 /* PaymentRow.swift */; };
 		A21F6802285B7EB700FD19F5 /* EditingPaymentForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = A21F67F7285B7EB700FD19F5 /* EditingPaymentForm.swift */; };
 		A21F6803285B7EB700FD19F5 /* PaymentRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = A21F67F9285B7EB700FD19F5 /* PaymentRepository.swift */; };
-		A21F6804285B7EB700FD19F5 /* PaymentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A21F67FB285B7EB700FD19F5 /* PaymentModel.swift */; };
-		A21F6805285B7EB700FD19F5 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A21F67FD285B7EB700FD19F5 /* Constants.swift */; };
+		A24642432860BF6D001A1ED3 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24642422860BF6D001A1ED3 /* Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -47,8 +46,7 @@
 		A21F67F5285B7EB700FD19F5 /* PaymentRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentRow.swift; sourceTree = "<group>"; };
 		A21F67F7285B7EB700FD19F5 /* EditingPaymentForm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditingPaymentForm.swift; sourceTree = "<group>"; };
 		A21F67F9285B7EB700FD19F5 /* PaymentRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentRepository.swift; sourceTree = "<group>"; };
-		A21F67FB285B7EB700FD19F5 /* PaymentModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentModel.swift; sourceTree = "<group>"; };
-		A21F67FD285B7EB700FD19F5 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		A24642422860BF6D001A1ED3 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,11 +88,9 @@
 		7555FF7D242A565900829871 /* iosApp */ = {
 			isa = PBXGroup;
 			children = (
-				A21F67FA285B7EB700FD19F5 /* Model */,
+				A24642412860BF5F001A1ED3 /* Helpers */,
 				A21F67F8285B7EB700FD19F5 /* Repository */,
-				A21F67F1285B7EB700FD19F5 /* UI */,
-				A21F67FC285B7EB700FD19F5 /* Utils */,
-				A21F67EF285B7EB700FD19F5 /* ViewModel */,
+				A21F67F1285B7EB700FD19F5 /* UserFlows */,
 				058557BA273AAA24004C7B11 /* Assets.xcassets */,
 				7555FF82242A565900829871 /* ContentView.swift */,
 				7555FF8C242A565B00829871 /* Info.plist */,
@@ -119,31 +115,22 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
-		A21F67F1285B7EB700FD19F5 /* UI */ = {
+		A21F67F1285B7EB700FD19F5 /* UserFlows */ = {
 			isa = PBXGroup;
 			children = (
 				A21F67F2285B7EB700FD19F5 /* Payments */,
-				A21F67F6285B7EB700FD19F5 /* PaymentSheet */,
 			);
-			path = UI;
+			path = UserFlows;
 			sourceTree = "<group>";
 		};
 		A21F67F2285B7EB700FD19F5 /* Payments */ = {
 			isa = PBXGroup;
 			children = (
+				A21F67EF285B7EB700FD19F5 /* ViewModel */,
+				A24642402860BF31001A1ED3 /* Components */,
 				A21F67F3285B7EB700FD19F5 /* PaymentsList.swift */,
-				A21F67F4285B7EB700FD19F5 /* SumPayCard.swift */,
-				A21F67F5285B7EB700FD19F5 /* PaymentRow.swift */,
 			);
 			path = Payments;
-			sourceTree = "<group>";
-		};
-		A21F67F6285B7EB700FD19F5 /* PaymentSheet */ = {
-			isa = PBXGroup;
-			children = (
-				A21F67F7285B7EB700FD19F5 /* EditingPaymentForm.swift */,
-			);
-			path = PaymentSheet;
 			sourceTree = "<group>";
 		};
 		A21F67F8285B7EB700FD19F5 /* Repository */ = {
@@ -154,20 +141,22 @@
 			path = Repository;
 			sourceTree = "<group>";
 		};
-		A21F67FA285B7EB700FD19F5 /* Model */ = {
+		A24642402860BF31001A1ED3 /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				A21F67FB285B7EB700FD19F5 /* PaymentModel.swift */,
+				A21F67F7285B7EB700FD19F5 /* EditingPaymentForm.swift */,
+				A21F67F5285B7EB700FD19F5 /* PaymentRow.swift */,
+				A21F67F4285B7EB700FD19F5 /* SumPayCard.swift */,
 			);
-			path = Model;
+			path = Components;
 			sourceTree = "<group>";
 		};
-		A21F67FC285B7EB700FD19F5 /* Utils */ = {
+		A24642412860BF5F001A1ED3 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				A21F67FD285B7EB700FD19F5 /* Constants.swift */,
+				A24642422860BF6D001A1ED3 /* Extensions.swift */,
 			);
-			path = Utils;
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -263,11 +252,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				A21F6803285B7EB700FD19F5 /* PaymentRepository.swift in Sources */,
+				A24642432860BF6D001A1ED3 /* Extensions.swift in Sources */,
 				A21F67FE285B7EB700FD19F5 /* PaymentsViewModel.swift in Sources */,
 				2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */,
-				A21F6804285B7EB700FD19F5 /* PaymentModel.swift in Sources */,
 				A21F6800285B7EB700FD19F5 /* SumPayCard.swift in Sources */,
-				A21F6805285B7EB700FD19F5 /* Constants.swift in Sources */,
 				A21F67FF285B7EB700FD19F5 /* PaymentsList.swift in Sources */,
 				7555FF83242A565900829871 /* ContentView.swift in Sources */,
 				A21F6802285B7EB700FD19F5 /* EditingPaymentForm.swift in Sources */,
@@ -400,7 +388,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"iosApp/Preview Content\"";
-				DEVELOPMENT_TEAM = 5XY4M72NS4;
+				DEVELOPMENT_TEAM = 839TD98QB7;
 				ENABLE_PREVIEWS = YES;
 				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/../PaymentKit/build/xcode-frameworks/$(CONFIGURATION)/$(SDK_NAME)";
 				INFOPLIST_FILE = iosApp/Info.plist;
@@ -414,7 +402,7 @@
 					"-framework",
 					PaymentKit,
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.kommunalka.app;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kommunalka.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -427,7 +415,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"iosApp/Preview Content\"";
-				DEVELOPMENT_TEAM = 5XY4M72NS4;
+				DEVELOPMENT_TEAM = 839TD98QB7;
 				ENABLE_PREVIEWS = YES;
 				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/../PaymentKit/build/xcode-frameworks/$(CONFIGURATION)/$(SDK_NAME)";
 				INFOPLIST_FILE = iosApp/Info.plist;
@@ -441,7 +429,7 @@
 					"-framework",
 					PaymentKit,
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.kommunalka.app;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kommunalka.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
