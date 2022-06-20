@@ -8,18 +8,12 @@
 import Foundation
 import PaymentKit
 
-extension Int32 {
-    var asKotlinInt: KotlinInt  {
-        KotlinInt(int: self)
-    }
-}
-
 protocol PaymentRepositoryProtocol {
     func getPayment(forceReload: Bool) async throws -> [PaymentModel]
     func updatePayment(hotWaterCount: Int32?, coldWaterCount: Int32?, electicity: Int32?, date: String?) async throws -> PaymentModel?
     func createPayment(with model: PaymentModel) async throws -> PaymentModel?
     func deletePayment(with paymentId: String) async -> Bool
-    func sumFor(payment: PaymentModel) -> Float
+    func calculate(currentPayment: PaymentModel, previousPayment: PaymentModel) -> Double
 }
 
 class PaymentRepository: PaymentRepositoryProtocol {
@@ -51,8 +45,7 @@ class PaymentRepository: PaymentRepositoryProtocol {
         }
     }
     
-    // TODO: - remove to KMM core logic
-    func sumFor(payment: PaymentModel) -> Float {
-        (Float(payment.electricity) * Tarrif.electricityPrice) + (Float(payment.coldWaterCount) * Tarrif.coldWaterPrice) + (Float(payment.hotWaterCount) * Tarrif.hotWaterPrice)
+    func calculate(currentPayment: PaymentModel, previousPayment: PaymentModel) -> Double {
+        self.paymentManager.calculate(currentMonthPaymentModel: currentPayment, previousMonthPaymentModel: previousPayment)
     }
 }

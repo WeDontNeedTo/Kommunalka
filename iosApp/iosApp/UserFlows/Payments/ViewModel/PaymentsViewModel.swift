@@ -18,8 +18,6 @@ class PaymentViewModel: ObservableObject {
     
     @Published var paymentsList: [PaymentModel] = []
     @Published var editingPayment: PaymentModel = PaymentModel(id: UUID().uuidString, hotWaterCount: 0, coldWaterCount: 0, electricity: 0, date: "")
-    @Published var previousPay: Float = .zero
-    @Published var currentPay: Float = .zero
     @Published var sumForPay: Float = .zero
     @Published var isEditing: Bool = false
     @Published var isLoading: Bool = false
@@ -75,20 +73,14 @@ extension PaymentViewModel {
         guard let result = try? await paymentRepository.getPayment(forceReload: forceReload) else { return }
         self.paymentsList = result
     }
-    
-    private func calculateMonthPay(for payment: PaymentModel) -> Float {
-        return paymentRepository.sumFor(payment: payment)
-    }
-    
-    // TODO: - remove to KMM core logic
+
     private func calculatePay() {
+        self.sumForPay = 0.0
         guard paymentsList.count > 1 else { return }
         let monthsSlice = paymentsList.dropFirst(paymentsList.count - 2)
         guard monthsSlice.count == 2 else { return }
         let differenceMonthArray = Array(monthsSlice)
-        self.previousPay = paymentRepository.sumFor(payment: differenceMonthArray[0])
-        self.currentPay = paymentRepository.sumFor(payment: differenceMonthArray[1])
-        self.sumForPay =  self.currentPay - self.previousPay
+        self.sumForPay = Float(self.paymentRepository.calculate(currentPayment: differenceMonthArray[1], previousPayment: differenceMonthArray[0]))
     }
     
     private func addPayment(with model: PaymentModel) async {
@@ -110,5 +102,3 @@ extension PaymentViewModel {
         }
     }
 }
-
-extension PaymentModel: Identifiable {}

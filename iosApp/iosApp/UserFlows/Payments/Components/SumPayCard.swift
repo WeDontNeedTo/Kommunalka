@@ -6,10 +6,9 @@
 //
 
 import SwiftUI
+import PaymentKit
 
 struct SumPayCard: View {
-    @Binding var previousSum: Float
-    @Binding var currentSum: Float
     @Binding var sum: Float
     
     private var numberFormatter: NumberFormatter {
@@ -21,13 +20,21 @@ struct SumPayCard: View {
     
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
-            Text("Сумма за прошлый месяц: \(numberFormatter.string(from: previousSum as NSNumber) ?? "0.0")")
+            Text("Тарифы: ")
+                .font(.headline)
+            
+            Text("Холодная вода: \(Tarrif.shared.COLD_WATER_PRICE.description) за куб/м3")
                 .font(.headline)
                 .foregroundColor(.secondary)
-
-            Text("Сумма за текущий месяц: \(numberFormatter.string(from: currentSum as NSNumber) ?? "0.0")")
+            
+            Text("Горячая вода: \(Tarrif.shared.HOT_WATER_PRICE.description) за куб/м3")
                 .font(.headline)
-
+                .foregroundColor(.secondary)
+            
+            Text("Электричество: \(Tarrif.shared.ELECTRICITY_PRICE.description) за кВт/ч")
+                .font(.headline)
+                .foregroundColor(.secondary)
+            
             Divider()
             
             Text("Текущий платеж: \(numberFormatter.string(from: sum as NSNumber) ?? "0.0")")
@@ -42,6 +49,6 @@ struct SumPayCard: View {
 
 struct SumPayCard_Previews: PreviewProvider {
     static var previews: some View {
-        SumPayCard(previousSum: .constant(600), currentSum: .constant(600), sum: .constant(600))
+        SumPayCard(sum: .constant(600))
     }
 }

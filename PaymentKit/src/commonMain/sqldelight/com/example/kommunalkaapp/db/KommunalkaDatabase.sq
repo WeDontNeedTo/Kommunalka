@@ -1,0 +1,16 @@
+CREATE TABLE payment (
+    id TEXT NOT NULL,
+    hotWaterCount INTEGER NOT NULL,
+    coldWaterCount INTEGER NOT NULL,
+    electricity INTEGER NOT NULL,
+    date TEXT NOT NULL
+);
+
+selectAll:
+SELECT * FROM payment;
+
+insertPayment:
+INSERT INTO payment(id, hotWaterCount, coldWaterCount, electricity, date) VALUES (?, ?,?,?,?);
+
+removeAllPayments:
+DELETE FROM payment;

@@ -17,11 +17,7 @@ struct PaymentsList: View {
         NavigationView {
             List {
                 Section {
-                    SumPayCard(
-                        previousSum: $paymentViewModel.previousPay,
-                        currentSum: $paymentViewModel.currentPay,
-                        sum: $paymentViewModel.sumForPay
-                    )
+                    SumPayCard(sum: $paymentViewModel.sumForPay)
                 }
                 if paymentViewModel.isLoading {
                     ProgressView()
