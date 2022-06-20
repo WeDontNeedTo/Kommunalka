@@ -8,34 +8,36 @@
 import Foundation
 import PaymentKit
 
+@MainActor
 class PaymentViewModel: ObservableObject {
-    
     private let paymentRepository: PaymentRepositoryProtocol
-    private let networkClient = NetworkClient()
     
     init(paymentRepository: PaymentRepositoryProtocol) {
         self.paymentRepository = paymentRepository
     }
     
-    @Published var paymentsList: [PaymentModelObject] = []
-    @Published var editingPayment: PaymentModelObject = PaymentModelObject(hotWaterCount: 0, coldWaterCount: 0, electricity: 0, date: "")
+    @Published var paymentsList: [PaymentModel] = []
+    @Published var editingPayment: PaymentModel = PaymentModel(id: UUID().uuidString, hotWaterCount: 0, coldWaterCount: 0, electricity: 0, date: "")
     @Published var previousPay: Float = .zero
     @Published var currentPay: Float = .zero
     @Published var sumForPay: Float = .zero
     @Published var isEditing: Bool = false
+    @Published var isLoading: Bool = false
     @Published var selectedDate = Date()
     
     
-    func onViewAppear() {
-        self.getPayments()
+    func fetchPaymentList(forceReload: Bool = false) async {
+        self.isLoading = true
+        await self.getPayments(forceReload: forceReload)
         self.calculatePay()
+        self.isLoading = false
     }
     
-    func onPaymentDoneButtonPressed() {
+    func onPaymentDoneButtonPressed() async {
         if self.isEditing {
-            self.updateRow(with: self.editingPayment.id, and: self.editingPayment)
+            await self.updateRow(model: self.editingPayment)
         } else {
-            self.addPayment(with: self.editingPayment)
+            await self.addPayment(with: self.editingPayment)
         }
     }
     
@@ -48,47 +50,37 @@ class PaymentViewModel: ObservableObject {
     }
     
     func onEditSheetDismissed() {
-        self.editingPayment = PaymentModelObject(hotWaterCount: 0, coldWaterCount: 0, electricity: 0, date: "")
+        self.editingPayment = PaymentModel(id: UUID().uuidString, hotWaterCount: 0, coldWaterCount: 0, electricity: 0, date: "")
         self.isEditing = false
         self.selectedDate = Date()
     }
     
-    func editFor(_ payment: PaymentModelObject) {
+    func editFor(_ payment: PaymentModel) {
         self.isEditing = true
         self.editingPayment = payment
     }
     
-    func deleteRow(with element: PaymentModelObject) {
-        self.paymentsList = self.paymentsList.filter { $0.id != element.id }
-        self.paymentRepository.savePayments(with: self.paymentsList)
-        self.calculatePay()
-    }
-    
-    func getTest() async -> [PaymentModel] {
-        return await withCheckedContinuation { continuation in
-            networkClient.getPayments { payments, error in
-                if let payments = payments {
-                    continuation.resume(returning: payments)
-                }
-                if let error = error {
-                    continuation.resume(returning: [])
-                }
-            }
+    func deleteRow(with element: PaymentModel) async {
+        let result = await self.paymentRepository.deletePayment(with: element.id)
+        if result {
+            await self.getPayments(forceReload: true)
+            self.calculatePay()
         }
     }
-
 }
 
 // MARK: - private methods
 extension PaymentViewModel {
-    private func getPayments() {
-        self.paymentsList = self.paymentRepository.getPayment()
+    private func getPayments(forceReload: Bool) async {
+        guard let result = try? await paymentRepository.getPayment(forceReload: forceReload) else { return }
+        self.paymentsList = result
     }
     
-    private func calculateMonthPay(for payment: PaymentModelObject) -> Float {
+    private func calculateMonthPay(for payment: PaymentModel) -> Float {
         return paymentRepository.sumFor(payment: payment)
     }
     
+    // TODO: - remove to KMM core logic
     private func calculatePay() {
         guard paymentsList.count > 1 else { return }
         let monthsSlice = paymentsList.dropFirst(paymentsList.count - 2)
@@ -99,14 +91,24 @@ extension PaymentViewModel {
         self.sumForPay =  self.currentPay - self.previousPay
     }
     
-    private func addPayment(with model: PaymentModelObject) {
-        paymentsList.append(model)
-        self.paymentRepository.savePayments(with: paymentsList)
-        self.calculatePay()
+    private func addPayment(with model: PaymentModel) async {
+        if (try? await paymentRepository.createPayment(with: model)) != nil {
+            await self.getPayments(forceReload: true)
+            self.calculatePay()
+        }
     }
     
-    private func updateRow(with paymentId: UUID, and model: PaymentModelObject) {
-        self.paymentsList = self.paymentRepository.updatePayment(with: paymentId, and: model)
-        self.calculatePay()
+    private func updateRow(model: PaymentModel) async {
+        if (try? await paymentRepository.updatePayment(
+            hotWaterCount: model.hotWaterCount,
+            coldWaterCount: model.coldWaterCount,
+            electicity: model.electricity,
+            date: model.date
+        )) != nil {
+            await self.getPayments(forceReload: true)
+            self.calculatePay()
+        }
     }
 }
+
+extension PaymentModel: Identifiable {}

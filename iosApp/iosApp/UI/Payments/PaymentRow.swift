@@ -6,9 +6,10 @@
 //
 
 import SwiftUI
+import PaymentKit
 
 struct PaymentRow: View {
-    let payment: PaymentModelObject
+    let payment: PaymentModel
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -40,11 +41,5 @@ struct PaymentRow: View {
             .font(.headline)
         }
         .padding(.vertical)
-    }
-}
-
-struct PaymentRow_Previews: PreviewProvider {
-    static var previews: some View {
-        PaymentRow(payment: PaymentModelObject(hotWaterCount: 322, coldWaterCount: 228, electricity: 16018, date: "Май"))
     }
 }

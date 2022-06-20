@@ -17,43 +17,50 @@ struct PaymentsList: View {
         NavigationView {
             List {
                 Section {
-                    Text("String is \(testString)")
                     SumPayCard(
                         previousSum: $paymentViewModel.previousPay,
                         currentSum: $paymentViewModel.currentPay,
                         sum: $paymentViewModel.sumForPay
                     )
                 }
-                
+                if paymentViewModel.isLoading {
+                    ProgressView()
+                } else {
                 Section {
-                    if paymentViewModel.paymentsList.isEmpty {
-                        Text("Нету плажетей")
-                            .font(.headline)
-                    } else {
-                        ForEach(paymentViewModel.paymentsList) { payment in
-                            PaymentRow(payment: payment)
-                                .swipeActions(edge: .trailing, allowsFullSwipe: false, content: {
-                                    Button(role: .destructive) {
-                                        paymentViewModel.deleteRow(with: payment)
-                                    } label: {
-                                        Label("Удалить", systemImage: "trash.fill")
-                                    }
-                                    
-                                    Button() {
-                                        paymentViewModel.editFor(payment)
-                                        isPresented.toggle()
-                                    } label: {
-                                        Label("Изменить", systemImage: "pencil.circle.fill")
-                                    }
-                                    .tint(.blue)
-                                })
+                        if paymentViewModel.paymentsList.isEmpty {
+                            Text("Нету плажетей")
+                                .font(.headline)
+                        } else {
+                            ForEach(paymentViewModel.paymentsList, id: \.self.id) { payment in
+                                PaymentRow(payment: payment)
+                                    .swipeActions(edge: .trailing, allowsFullSwipe: false, content: {
+                                        Button(role: .destructive) {
+                                            Task {
+                                                await paymentViewModel.deleteRow(with: payment)
+                                            }
+                                        } label: {
+                                            Label("Удалить", systemImage: "trash.fill")
+                                        }
+                                        
+                                        Button() {
+                                            paymentViewModel.editFor(payment)
+                                            isPresented.toggle()
+                                        } label: {
+                                            Label("Изменить", systemImage: "pencil.circle.fill")
+                                        }
+                                        .tint(.blue)
+                                    })
+                            }
                         }
                     }
                 }
             }
-            .animation(.spring(), value: paymentViewModel.paymentsList)
-            .onAppear {
-                paymentViewModel.onViewAppear()
+            .animation(.spring().speed(0.4), value: paymentViewModel.paymentsList)
+            .task {
+                await paymentViewModel.fetchPaymentList()
+            }
+            .refreshable {
+                await paymentViewModel.fetchPaymentList(forceReload: true)
             }
             .sheet(isPresented: $isPresented, onDismiss: {
                 paymentViewModel.onEditSheetDismissed()
@@ -69,9 +76,6 @@ struct PaymentsList: View {
                         Label("", systemImage: "note.text.badge.plus")
                     }
                 }
-            }
-            .task {
-                debugPrint(await paymentViewModel.getTest())
             }
         }
     }
