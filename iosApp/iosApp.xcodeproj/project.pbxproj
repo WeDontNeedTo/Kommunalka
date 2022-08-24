@@ -18,6 +18,7 @@
 		A21F6802285B7EB700FD19F5 /* EditingPaymentForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = A21F67F7285B7EB700FD19F5 /* EditingPaymentForm.swift */; };
 		A21F6803285B7EB700FD19F5 /* PaymentRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = A21F67F9285B7EB700FD19F5 /* PaymentRepository.swift */; };
 		A24642432860BF6D001A1ED3 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24642422860BF6D001A1ED3 /* Extensions.swift */; };
+		A2A5EB6D28B65CE1009066EA /* IntroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2A5EB6C28B65CE1009066EA /* IntroView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -47,6 +48,7 @@
 		A21F67F7285B7EB700FD19F5 /* EditingPaymentForm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditingPaymentForm.swift; sourceTree = "<group>"; };
 		A21F67F9285B7EB700FD19F5 /* PaymentRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentRepository.swift; sourceTree = "<group>"; };
 		A24642422860BF6D001A1ED3 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		A2A5EB6C28B65CE1009066EA /* IntroView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,6 +120,7 @@
 		A21F67F1285B7EB700FD19F5 /* UserFlows */ = {
 			isa = PBXGroup;
 			children = (
+				A2A5EB6B28B65CC5009066EA /* Intro */,
 				A21F67F2285B7EB700FD19F5 /* Payments */,
 			);
 			path = UserFlows;
@@ -157,6 +160,14 @@
 				A24642422860BF6D001A1ED3 /* Extensions.swift */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		A2A5EB6B28B65CC5009066EA /* Intro */ = {
+			isa = PBXGroup;
+			children = (
+				A2A5EB6C28B65CE1009066EA /* IntroView.swift */,
+			);
+			path = Intro;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -258,6 +269,7 @@
 				A21F6800285B7EB700FD19F5 /* SumPayCard.swift in Sources */,
 				A21F67FF285B7EB700FD19F5 /* PaymentsList.swift in Sources */,
 				7555FF83242A565900829871 /* ContentView.swift in Sources */,
+				A2A5EB6D28B65CE1009066EA /* IntroView.swift in Sources */,
 				A21F6802285B7EB700FD19F5 /* EditingPaymentForm.swift in Sources */,
 				A21F6801285B7EB700FD19F5 /* PaymentRow.swift in Sources */,
 			);

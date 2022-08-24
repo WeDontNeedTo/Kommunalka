@@ -2,9 +2,19 @@ import SwiftUI
 import PaymentKit
 
 struct ContentView: View {
+    @State private var isShowedIntro: Bool = false
     
 	var body: some View {
-        PaymentsList()
+        ZStack {
+            if isShowedIntro {
+                PaymentsList()
+                    .transition(.identity)
+            } else {
+                IntroView(isShowedIntro: $isShowedIntro)
+                    .transition(.identity)
+            }
+        }
+        .animation(.spring(), value: isShowedIntro)
 	}
 }
 
