@@ -47,6 +47,7 @@ class PaymentViewModel: ObservableObject {
         }
     }
     
+    @MainActor
     func onEditSheetDismissed() {
         self.editingPayment = PaymentModel(id: UUID().uuidString, hotWaterCount: 0, coldWaterCount: 0, electricity: 0, date: "")
         self.isEditing = false

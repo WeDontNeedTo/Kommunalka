@@ -19,12 +19,12 @@ import androidx.compose.ui.unit.sp
 import com.example.kommunalkaapp.model.PaymentModel
 
 @Composable
-fun PaymentList(payments: List<PaymentModel>) {
+fun PaymentList(viewModel: PaymentViewModel) {
     LazyColumn(
         contentPadding = PaddingValues(10.dp),
         verticalArrangement = Arrangement.spacedBy(14.dp),
         ) {
-        items(payments) { payment ->
+        items(viewModel.paymentListState.value ?: listOf()) { payment ->
             PaymentRow(paymentModel = payment)
         }
     }
@@ -58,25 +58,4 @@ fun PaymentRow(paymentModel: PaymentModel) {
             color = Color.Yellow
         )
     }
-}
-
-@Preview
-@Composable
-fun PreviewPaymentRow() {
-    PaymentList(payments = listOf(
-        PaymentModel(
-            id = "GD67G12GS126SG126",
-            hotWaterCount = 699,
-            coldWaterCount = 700,
-            electricity = 5000,
-            date = "20.06.2022"
-        ),
-        PaymentModel(
-            id = "GD67G12GS126SG126",
-            hotWaterCount = 699,
-            coldWaterCount = 700,
-            electricity = 5000,
-            date = "22.06.2022"
-        )
-    ))
 }

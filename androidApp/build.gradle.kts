@@ -3,14 +3,14 @@ plugins {
     kotlin("android")
 }
 
-val composeVersion = "1.2.0-alpha01"
+val composeVersion = "1.4.0-alpha02"
 
 android {
-    compileSdk = 32
+    compileSdk = 33
     defaultConfig {
         applicationId = "com.example.kommunalkaapp.android"
-        minSdk = 21
-        targetSdk = 32
+        minSdk = 24
+        targetSdk = 33
         versionCode = 1
         versionName = "1.0"
     }

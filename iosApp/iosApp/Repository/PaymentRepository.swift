@@ -19,14 +19,17 @@ protocol PaymentRepositoryProtocol {
 class PaymentRepository: PaymentRepositoryProtocol {
     private let paymentManager = PaymentManager(databaseDriverFactory: DatabaseDriverFactory())
     
+    @MainActor
     func getPayment(forceReload: Bool) async throws -> [PaymentModel] {
         return try await paymentManager.getPayments(forceReload: forceReload)
     }
     
+    @MainActor
     func createPayment(with model: PaymentModel) async throws -> PaymentModel? {
         try await paymentManager.createPayment(paymentModel: model)
     }
         
+    @MainActor
     func updatePayment(hotWaterCount: Int32? = nil, coldWaterCount: Int32? = nil, electicity: Int32? = nil, date: String? = nil) async throws -> PaymentModel? {
         let patchModel = PaymentPatchDTO(
             hotWaterCount: hotWaterCount?.asKotlinInt,
@@ -37,6 +40,7 @@ class PaymentRepository: PaymentRepositoryProtocol {
         return try await paymentManager.updatePayment(patchDTO: patchModel)
     }
     
+    @MainActor
     func deletePayment(with paymentId: String) async -> Bool {
         do {
             return try await paymentManager.deletePayment(paymentId: paymentId) as! Bool
