@@ -23,7 +23,7 @@ class PaymentViewModel: ObservableObject {
     @Published var isLoading: Bool = false
     @Published var selectedDate = Date()
     
-    
+    @MainActor
     func fetchPaymentList(forceReload: Bool = false) async {
         self.isLoading = true
         await self.getPayments(forceReload: forceReload)
