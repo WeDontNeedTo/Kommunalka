@@ -11,6 +11,7 @@ import com.example.kommunalkaapp.data.DatabaseDriverFactory
 import com.example.kommunalkaapp.model.PaymentModel
 
 import kotlinx.coroutines.launch
+import java.util.*
 
 class PaymentViewModel(appObj: Application): AndroidViewModel(appObj) {
     var paymentListState = MutableLiveData<List<PaymentModel>>(listOf())
@@ -23,7 +24,57 @@ class PaymentViewModel(appObj: Application): AndroidViewModel(appObj) {
     private fun fetchPayments() {
         println("fetchPayments")
         viewModelScope.launch {
-            paymentListState.value = paymentManager.getPayments(true)
+            paymentListState.value = listOf(
+                PaymentModel(
+                    id = UUID.randomUUID().toString(),
+                    hotWaterCount = 100,
+                    coldWaterCount = 100,
+                    electricity = 100,
+                    date = "27.02.2002"
+                ),
+                PaymentModel(
+                    id = UUID.randomUUID().toString(),
+                    hotWaterCount = 200,
+                    coldWaterCount = 200,
+                    electricity = 200,
+                    date = "27.02.2032"
+                ),
+                PaymentModel(
+                    id = UUID.randomUUID().toString(),
+                    hotWaterCount = 1020,
+                    coldWaterCount = 200,
+                    electricity = 200,
+                    date = "27.02.1002"
+                ),
+                PaymentModel(
+                    id = UUID.randomUUID().toString(),
+                    hotWaterCount = 120,
+                    coldWaterCount = 200,
+                    electricity = 150,
+                    date = "27.02.2023"
+                ),
+                PaymentModel(
+                    id = UUID.randomUUID().toString(),
+                    hotWaterCount = 200,
+                    coldWaterCount = 200,
+                    electricity = 200,
+                    date = "27.02.2032"
+                ),
+                PaymentModel(
+                    id = UUID.randomUUID().toString(),
+                    hotWaterCount = 1020,
+                    coldWaterCount = 200,
+                    electricity = 200,
+                    date = "27.02.1002"
+                ),
+                PaymentModel(
+                    id = UUID.randomUUID().toString(),
+                    hotWaterCount = 120,
+                    coldWaterCount = 200,
+                    electricity = 150,
+                    date = "27.02.2023"
+                )
+            )
         }
     }
 }
