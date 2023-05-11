@@ -23,7 +23,7 @@ class PaymentViewModel: ObservableObject {
     @Published var isLoading: Bool = false
     @Published var selectedDate = Date()
     
-    
+    @MainActor
     func fetchPaymentList(forceReload: Bool = false) async {
         self.isLoading = true
         await self.getPayments(forceReload: forceReload)
@@ -47,6 +47,7 @@ class PaymentViewModel: ObservableObject {
         }
     }
     
+    @MainActor
     func onEditSheetDismissed() {
         self.editingPayment = PaymentModel(id: UUID().uuidString, hotWaterCount: 0, coldWaterCount: 0, electricity: 0, date: "")
         self.isEditing = false

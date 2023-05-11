@@ -18,7 +18,7 @@ kotlin {
         }
     }
 
-    val ktor_version = "2.0.2"
+    val ktor_version = "2.2.4"
 
     sourceSets {
         val commonMain by getting {
@@ -28,6 +28,8 @@ kotlin {
                 implementation("io.ktor:ktor-client-content-negotiation:$ktor_version")
                 implementation("io.ktor:ktor-serialization-kotlinx-json:$ktor_version")
                 implementation("com.squareup.sqldelight:runtime:1.5.3")
+                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4-native-mt")
+                implementation("io.ktor:ktor-client-logging:$ktor_version")
             }
         }
         val commonTest by getting {
@@ -68,11 +70,11 @@ kotlin {
 }
 
 android {
-    compileSdk = 32
+    compileSdk = 33
     sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
     defaultConfig {
-        minSdk = 21
-        targetSdk = 32
+        minSdk = 24
+        targetSdk = 33
     }
 }
 

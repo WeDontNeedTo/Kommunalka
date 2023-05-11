@@ -12,7 +12,6 @@ struct PaymentsList: View {
     @State private var isPresented: Bool = false
     @State private var testString: String = ""
 
-    
     var body: some View {
         NavigationView {
             List {
