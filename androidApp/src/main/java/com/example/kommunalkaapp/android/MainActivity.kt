@@ -15,9 +15,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            MaterialTheme {
-                PaymentList(viewModel = PaymentViewModel(application))
-            }
+            PaymentList(viewModel = PaymentViewModel(application))
         }
     }
 }

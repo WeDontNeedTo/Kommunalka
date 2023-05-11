@@ -5,37 +5,68 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import com.example.kommunalkaapp.android.navigation.PaymentScreens
+import com.example.kommunalkaapp.android.ui.OpenSans
 import com.example.kommunalkaapp.model.PaymentModel
 
 @Composable
 fun PaymentList(viewModel: PaymentViewModel) {
+    val navController = rememberNavController()
+
     Scaffold(
         topBar = {
-            TopAppBar() {
-                Text("Платежи", fontSize = 22.sp)
+            TopAppBar(
+                elevation = 8.dp
+            ) {
+                Text("Платежи", color = Color.White, fontSize = 22.sp, modifier = Modifier.padding(horizontal = 4.dp))
+                Spacer(modifier = Modifier.weight(1f, true))
             }
         }
     ) { contentPadding ->
-        Box() {
-            LazyColumn(
-                contentPadding = PaddingValues(10.dp),
-                verticalArrangement = Arrangement.spacedBy(14.dp),
-                modifier = Modifier.padding(4.dp)
-            ) {
-                item {
-                    PaymentInfoCard()
+        NavHost(
+            navController = navController,
+            startDestination = PaymentScreens.Start.name,
+            modifier = Modifier.padding(contentPadding)
+        ) {
+            composable(PaymentScreens.Start.name) {
+                LazyColumn(
+                    contentPadding = PaddingValues(10.dp),
+                    verticalArrangement = Arrangement.spacedBy(14.dp),
+                    modifier = Modifier.padding(4.dp)
+                ) {
+                    item {
+                        Row() {
+                            Text("Добавьте новую запись!")
+                        }
+                        IconButton(onClick = {
+                            navController.navigate(PaymentScreens.AddPayment.name)
+                        }) {
+                            Icon(Icons.Filled.Add, contentDescription = "Добавить" )
+                        }
+                    }
+                    item { PaymentInfoCard() }
+                    items(viewModel.paymentListState.value ?: listOf()) { payment ->
+                        PaymentRow(paymentModel = payment)
+                    }
                 }
-                items(viewModel.paymentListState.value ?: listOf()) { payment ->
-                    PaymentRow(paymentModel = payment)
-                }
+            }
+
+            composable(PaymentScreens.AddPayment.name) {
+                AddPaymentScreen()
             }
         }
     }
@@ -91,8 +122,11 @@ fun PaymentRow(paymentModel: PaymentModel) {
             Text(
                 text = "Отчет за ${paymentModel.date}",
                 color = Color.Black,
-                fontWeight = FontWeight.Bold,
-                fontSize = 18.sp
+                style = TextStyle(
+                    fontFamily = OpenSans,
+                    fontSize = 18.sp,
+                    fontWeight = FontWeight.Bold
+                )
             )
 
             Column(
@@ -100,21 +134,33 @@ fun PaymentRow(paymentModel: PaymentModel) {
             ) {
                 Text(
                     text = "Горячая вода: ${paymentModel.hotWaterCount} куб/м",
-                    color = Color.Red,
-                    fontWeight = FontWeight.SemiBold,
+                    color = Color(0xFFFF0000),
+                    style = TextStyle(
+                        fontFamily = OpenSans,
+                        fontSize = 16.sp,
+                        fontWeight = FontWeight.SemiBold
+                    )
                 )
 
                 Text(
                     text = "Холодная вода: ${paymentModel.coldWaterCount} куб/м",
-                    color = Color.Blue,
-                    fontWeight = FontWeight.SemiBold,
+                    color = Color(0xFF00008B),
+                    style = TextStyle(
+                        fontFamily = OpenSans,
+                        fontSize = 16.sp,
+                        fontWeight = FontWeight.SemiBold
                     )
+                )
 
                 Text(
                     text = "Электричество: ${paymentModel.electricity} кВт/ч",
-                    color = Color.Cyan,
-                    fontWeight = FontWeight.SemiBold,
+                    color = Color(0xFFFFA500),
+                    style = TextStyle(
+                        fontFamily = OpenSans,
+                        fontSize = 16.sp,
+                        fontWeight = FontWeight.SemiBold
                     )
+                )
             }
         }
     }
