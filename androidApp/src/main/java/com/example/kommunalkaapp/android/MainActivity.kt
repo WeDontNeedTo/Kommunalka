@@ -12,15 +12,13 @@ import com.example.kommunalkaapp.android.userflows.payments.PaymentViewModel
 import com.example.kommunalkaapp.model.PaymentModel
 
 class MainActivity : AppCompatActivity() {
+
+    private lateinit var viewModel: PaymentViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
+        viewModel = PaymentViewModel(application)
         super.onCreate(savedInstanceState)
         setContent {
-            PaymentList(viewModel = PaymentViewModel(application))
+            PaymentList(viewModel = viewModel)
         }
     }
-}
-
-@Composable
-fun MainView() {
-    Text(text = "Hello!")
 }

@@ -11,6 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.modifier.modifierLocalConsumer
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
@@ -50,12 +51,15 @@ fun PaymentList(viewModel: PaymentViewModel) {
                 ) {
                     item {
                         Row() {
-                            Text("Добавьте новую запись!")
-                        }
-                        IconButton(onClick = {
-                            navController.navigate(PaymentScreens.AddPayment.name)
-                        }) {
-                            Icon(Icons.Filled.Add, contentDescription = "Добавить" )
+                            Spacer(modifier = Modifier.weight(1f, true))
+                            Text("Добавьте новую запись!",
+                                modifier = Modifier.align(Alignment.CenterVertically)
+                            )
+                            IconButton(onClick = {
+                                navController.navigate(PaymentScreens.AddPayment.name)
+                            }) {
+                                Icon(Icons.Filled.Add, contentDescription = "Добавить" )
+                            }
                         }
                     }
                     item { PaymentInfoCard() }
@@ -66,7 +70,7 @@ fun PaymentList(viewModel: PaymentViewModel) {
             }
 
             composable(PaymentScreens.AddPayment.name) {
-                AddPaymentScreen()
+                AddPaymentScreen(viewModel, navController)
             }
         }
     }

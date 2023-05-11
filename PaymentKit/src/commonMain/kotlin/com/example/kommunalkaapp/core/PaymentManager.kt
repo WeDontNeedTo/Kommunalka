@@ -18,6 +18,7 @@ class PaymentManager(databaseDriverFactory: DatabaseDriverFactory) {
             cachedPayments
         } else {
             networkClient.getPayments().also {
+                println("it is $it")
                 databaseClient.clearDatabase()
                 databaseClient.createPayments(it)
             }
@@ -39,6 +40,7 @@ class PaymentManager(databaseDriverFactory: DatabaseDriverFactory) {
         return networkClient.deletePayment(paymentId)
     }
 
+    // TODO - pass list of payments instead of current and previous months
     fun calculate(currentMonthPaymentModel: PaymentModel, previousMonthPaymentModel: PaymentModel): Double {
         val diffPaymentModel = PaymentModel(
             id = currentMonthPaymentModel.id,

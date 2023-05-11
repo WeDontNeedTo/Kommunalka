@@ -2,10 +2,7 @@ package com.example.kommunalkaapp.android.userflows.payments
 
 import android.app.DatePickerDialog
 import android.widget.DatePicker
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Button
@@ -25,11 +22,18 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
+import com.example.kommunalkaapp.android.navigation.PaymentScreens
 import com.example.kommunalkaapp.android.ui.OpenSans
+import com.example.kommunalkaapp.model.PaymentModel
 import java.util.*
 
 @Composable
-fun AddPaymentScreen() {
+fun AddPaymentScreen(
+    paymentViewModel: PaymentViewModel,
+    navHostController: NavHostController
+) {
     val mContext = LocalContext.current
 
     // Declaring integer values
@@ -52,6 +56,7 @@ fun AddPaymentScreen() {
     // store date in string format
     val mDate = remember { mutableStateOf("") }
 
+    // TODO - move datepicker logic to ViewModel?
     // Declaring DatePickerDialog and setting
     // initial values as current values (present year, month and day)
     val mDatePickerDialog = DatePickerDialog(
@@ -71,7 +76,7 @@ fun AddPaymentScreen() {
             modifier = Modifier
                 .padding(4.dp)
                 .verticalScroll(rememberScrollState())
-                .weight(weight = 1f, fill = false)
+                .weight(weight = 1f, fill = true)
         ) {
             Text(
                 text = "Добавьте запись о счетчиках",
@@ -81,6 +86,22 @@ fun AddPaymentScreen() {
                     fontWeight = FontWeight.Bold
                 )
             )
+
+            Row() {
+                // TODO - make more pretty design
+                Button(onClick = {
+                    navHostController.navigate(PaymentScreens.Start.name)
+                }) {
+                    Text(
+                        text = "Назад",
+                        style = TextStyle(
+                            fontFamily = OpenSans,
+                            fontWeight = FontWeight.SemiBold,
+                            fontSize = 19.sp
+                        )
+                    )
+                }
+            }
 
             Text(
                 text = "Выбранная дата: ${mDate.value}",
@@ -124,7 +145,19 @@ fun AddPaymentScreen() {
                     TextField(value = electricity.value, onValueChange = { electricity.value = it })
                 }
 
-                Button(onClick = { /*TODO*/ },
+                Button(onClick = {
+                    // TODO - handle UI loading states
+                    // TODO - auto-pop screen
+                    paymentViewModel.createNewPayment(
+                        PaymentModel(
+                            id = UUID.randomUUID().toString(),
+                            hotWaterCount = hotWater.value.toInt(),
+                            coldWaterCount = coldWater.value.toInt(),
+                            electricity = electricity.value.toInt(),
+                            date = mDate.value
+                        )
+                    )
+                },
                     colors = ButtonDefaults.buttonColors(backgroundColor = Color.Black)
                 ) {
                     Text(text = "Добавить запись", color = Color.White)
