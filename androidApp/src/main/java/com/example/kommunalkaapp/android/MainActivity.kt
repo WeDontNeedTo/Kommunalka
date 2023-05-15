@@ -10,6 +10,7 @@ import androidx.compose.runtime.Composable
 import com.example.kommunalkaapp.android.userflows.payments.PaymentList
 import com.example.kommunalkaapp.android.userflows.payments.PaymentViewModel
 import com.example.kommunalkaapp.model.PaymentModel
+import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
 class MainActivity : AppCompatActivity() {
 

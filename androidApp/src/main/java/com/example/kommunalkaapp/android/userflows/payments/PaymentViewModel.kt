@@ -14,7 +14,8 @@ import kotlinx.coroutines.launch
 import java.util.*
 
 class PaymentViewModel(appObj: Application): AndroidViewModel(appObj) {
-    var paymentListState = MutableLiveData<List<PaymentModel>>(listOf())
+    var paymentListState = mutableStateOf(listOf<PaymentModel>())
+    var isCreatePaymentLoading = mutableStateOf(false)
     private val paymentManager = PaymentManager(DatabaseDriverFactory(appObj))
 
     init {
@@ -23,13 +24,14 @@ class PaymentViewModel(appObj: Application): AndroidViewModel(appObj) {
 
      private fun fetchPayments() {
         viewModelScope.launch {
-            paymentListState.value = paymentManager.getPayments(forceReload = true)
+            paymentListState.value  = paymentManager.getPayments(forceReload = true)
         }
     }
 
     fun createNewPayment(newPaymentModel: PaymentModel) {
         viewModelScope.launch {
             paymentManager.createPayment(newPaymentModel)
+            isCreatePaymentLoading.value = false
             paymentListState.value = paymentManager.getPayments(forceReload = true)
         }
     }

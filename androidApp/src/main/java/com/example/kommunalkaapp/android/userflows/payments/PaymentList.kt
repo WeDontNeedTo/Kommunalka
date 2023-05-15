@@ -23,21 +23,28 @@ import androidx.navigation.compose.rememberNavController
 import com.example.kommunalkaapp.android.navigation.PaymentScreens
 import com.example.kommunalkaapp.android.ui.OpenSans
 import com.example.kommunalkaapp.model.PaymentModel
+import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
 @Composable
 fun PaymentList(viewModel: PaymentViewModel) {
     val navController = rememberNavController()
+    val systemUiController = rememberSystemUiController()
 
+    // TODO - add pull to refresh
+    // TODO - add delete
     Scaffold(
         topBar = {
             TopAppBar(
-                elevation = 8.dp
+                elevation = 8.dp,
+                backgroundColor = Color.Black
             ) {
                 Text("Платежи", color = Color.White, fontSize = 22.sp, modifier = Modifier.padding(horizontal = 4.dp))
                 Spacer(modifier = Modifier.weight(1f, true))
             }
-        }
+        },
+        contentColor = Color.Black
     ) { contentPadding ->
+        systemUiController.setSystemBarsColor(Color.Black)
         NavHost(
             navController = navController,
             startDestination = PaymentScreens.Start.name,
@@ -52,13 +59,15 @@ fun PaymentList(viewModel: PaymentViewModel) {
                     item {
                         Row() {
                             Spacer(modifier = Modifier.weight(1f, true))
-                            Text("Добавьте новую запись!",
-                                modifier = Modifier.align(Alignment.CenterVertically)
-                            )
                             IconButton(onClick = {
                                 navController.navigate(PaymentScreens.AddPayment.name)
                             }) {
-                                Icon(Icons.Filled.Add, contentDescription = "Добавить" )
+                                Row() {
+                                    Text("Добавьте новую запись!",
+                                        modifier = Modifier.align(Alignment.CenterVertically)
+                                    )
+                                    Icon(Icons.Filled.Add, contentDescription = "Добавить" )
+                                }
                             }
                         }
                     }

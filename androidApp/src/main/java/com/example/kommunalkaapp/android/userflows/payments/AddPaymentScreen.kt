@@ -2,17 +2,17 @@ package com.example.kommunalkaapp.android.userflows.payments
 
 import android.app.DatePickerDialog
 import android.widget.DatePicker
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.Button
-import androidx.compose.material.ButtonDefaults
-import androidx.compose.material.Divider
-import androidx.compose.material.Text
-import androidx.compose.material.TextField
+import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
@@ -57,6 +57,7 @@ fun AddPaymentScreen(
     val mDate = remember { mutableStateOf("") }
 
     // TODO - move datepicker logic to ViewModel?
+    // TODO - change datepicker color
     // Declaring DatePickerDialog and setting
     // initial values as current values (present year, month and day)
     val mDatePickerDialog = DatePickerDialog(
@@ -78,6 +79,16 @@ fun AddPaymentScreen(
                 .verticalScroll(rememberScrollState())
                 .weight(weight = 1f, fill = true)
         ) {
+            Row() {
+                IconButton(onClick = {
+                    navHostController.navigate(PaymentScreens.Start.name)
+                },
+                    Modifier.padding(0.dp)
+                ) {
+                    Icon(Icons.Filled.ArrowBack, contentDescription = "back")
+                }
+            }
+
             Text(
                 text = "Добавьте запись о счетчиках",
                 style = TextStyle(
@@ -86,22 +97,6 @@ fun AddPaymentScreen(
                     fontWeight = FontWeight.Bold
                 )
             )
-
-            Row() {
-                // TODO - make more pretty design
-                Button(onClick = {
-                    navHostController.navigate(PaymentScreens.Start.name)
-                }) {
-                    Text(
-                        text = "Назад",
-                        style = TextStyle(
-                            fontFamily = OpenSans,
-                            fontWeight = FontWeight.SemiBold,
-                            fontSize = 19.sp
-                        )
-                    )
-                }
-            }
 
             Text(
                 text = "Выбранная дата: ${mDate.value}",
@@ -145,22 +140,41 @@ fun AddPaymentScreen(
                     TextField(value = electricity.value, onValueChange = { electricity.value = it })
                 }
 
-                Button(onClick = {
-                    // TODO - handle UI loading states
-                    // TODO - auto-pop screen
-                    paymentViewModel.createNewPayment(
-                        PaymentModel(
-                            id = UUID.randomUUID().toString(),
-                            hotWaterCount = hotWater.value.toInt(),
-                            coldWaterCount = coldWater.value.toInt(),
-                            electricity = electricity.value.toInt(),
-                            date = mDate.value
+                Box() {
+                    Button(onClick = {
+                        // TODO - auto-pop screen
+                        paymentViewModel.isCreatePaymentLoading.value = true
+                        paymentViewModel.createNewPayment(
+                            PaymentModel(
+                                id = UUID.randomUUID().toString(),
+                                hotWaterCount = hotWater.value.toInt(),
+                                coldWaterCount = coldWater.value.toInt(),
+                                electricity = electricity.value.toInt(),
+                                date = mDate.value
+                            )
                         )
-                    )
-                },
-                    colors = ButtonDefaults.buttonColors(backgroundColor = Color.Black)
-                ) {
-                    Text(text = "Добавить запись", color = Color.White)
+                        navHostController.navigate(PaymentScreens.Start.name)
+                    },
+                        colors = ButtonDefaults.buttonColors(backgroundColor = Color.Black),
+                        enabled = !paymentViewModel.isCreatePaymentLoading.value
+                    ) {
+                        Text(
+                            text = "Добавить запись",
+                            color = Color.White,
+                            fontSize = 18.sp
+                        )
+                    }
+
+                    if (paymentViewModel.isCreatePaymentLoading.value) {
+                        Box(
+                            contentAlignment = Alignment.Center,
+                            modifier = Modifier
+                                .matchParentSize()
+                                .background(Color.White)
+                        ) {
+                            CircularProgressIndicator()
+                        }
+                    }
                 }
             }
         }
