@@ -6,4 +6,9 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="ThemeOverlay.MyApp.Dialog" parent="@style/Theme.AppCompat.DayNight.Dialog">
+        <item name="colorSecondary">@color/colorPrimaryDatepicker</item>
+        <item name="colorPrimary">@color/colorPrimaryDatepicker</item> <!-- button text color -->
+    </style>
+
 </resources>

@@ -26,6 +26,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import com.example.kommunalkaapp.android.R
 import com.example.kommunalkaapp.android.navigation.PaymentScreens
 import com.example.kommunalkaapp.android.ui.OpenSans
 import com.example.kommunalkaapp.model.PaymentModel
@@ -59,11 +60,11 @@ fun AddPaymentScreen(
     val mDate = remember { mutableStateOf("") }
 
     // TODO - move datepicker logic to ViewModel?
-    // TODO - change datepicker color
     // Declaring DatePickerDialog and setting
     // initial values as current values (present year, month and day)
     val mDatePickerDialog = DatePickerDialog(
         mContext,
+        R.style.ThemeOverlay_MyApp_Dialog,
         { _: DatePicker, mYear: Int, mMonth: Int, mDayOfMonth: Int ->
             mDate.value = "$mDayOfMonth/${mMonth+1}/$mYear"
         }, mYear, mMonth, mDay
@@ -159,7 +160,6 @@ fun AddPaymentScreen(
 
                 Box() {
                     Button(onClick = {
-                        // TODO - auto-pop screen
                         paymentViewModel.isCreatePaymentLoading.value = true
                         paymentViewModel.createNewPayment(
                             PaymentModel(

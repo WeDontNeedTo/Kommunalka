@@ -4,6 +4,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
@@ -126,6 +127,7 @@ fun PaymentRow(paymentModel: PaymentModel) {
             .fillMaxWidth()
             .padding(4.dp),
         elevation = 4.dp,
+        shape = RoundedCornerShape(16.dp)
     ) {
         Column(
             horizontalAlignment = Alignment.Start,
@@ -157,7 +159,7 @@ fun PaymentRow(paymentModel: PaymentModel) {
 
                 Text(
                     text = "Холодная вода: ${paymentModel.coldWaterCount} куб/м",
-                    color = Color(0xFF00008B),
+                    color = Color(0xFF1E90FF),
                     style = TextStyle(
                         fontFamily = OpenSans,
                         fontSize = 16.sp,
@@ -167,7 +169,7 @@ fun PaymentRow(paymentModel: PaymentModel) {
 
                 Text(
                     text = "Электричество: ${paymentModel.electricity} кВт/ч",
-                    color = Color(0xFFFFA500),
+                    color = Color(0xFFFF8C00),
                     style = TextStyle(
                         fontFamily = OpenSans,
                         fontSize = 16.sp,
