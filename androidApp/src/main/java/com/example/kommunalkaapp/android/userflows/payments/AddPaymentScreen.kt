@@ -5,6 +5,7 @@ import android.widget.DatePicker
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
@@ -18,6 +19,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -123,21 +125,33 @@ fun AddPaymentScreen(
                     verticalArrangement = Arrangement.spacedBy(4.dp),
                 ) {
                     Text("Горячая вода: ${hotWater.value} куб/м3")
-                    TextField(value = hotWater.value, onValueChange = { hotWater.value = it })
+                    TextField(
+                        value = hotWater.value,
+                        onValueChange = { hotWater.value = it },
+                        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
+                    )
                 }
 
                 Column(
                     verticalArrangement = Arrangement.spacedBy(4.dp),
                 ) {
                     Text("Холодная вода: ${coldWater.value} куб/м3")
-                    TextField(value = coldWater.value, onValueChange = { coldWater.value = it })
+                    TextField(
+                        value = coldWater.value,
+                        onValueChange = { coldWater.value = it },
+                        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
+                    )
                 }
 
                 Column(
                     verticalArrangement = Arrangement.spacedBy(4.dp),
                 ) {
                     Text("Электроэнергия: ${electricity.value} кВт/ч")
-                    TextField(value = electricity.value, onValueChange = { electricity.value = it })
+                    TextField(
+                        value = electricity.value,
+                        onValueChange = { electricity.value = it },
+                        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
+                    )
                 }
 
                 Box() {
