@@ -127,6 +127,7 @@ fun AddPaymentScreen(
                     Text("Горячая вода: ${hotWater.value} куб/м3")
                     TextField(
                         value = hotWater.value,
+                        singleLine = true,
                         onValueChange = { hotWater.value = it },
                         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
                     )
@@ -138,6 +139,7 @@ fun AddPaymentScreen(
                     Text("Холодная вода: ${coldWater.value} куб/м3")
                     TextField(
                         value = coldWater.value,
+                        singleLine = true,
                         onValueChange = { coldWater.value = it },
                         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
                     )
@@ -149,6 +151,7 @@ fun AddPaymentScreen(
                     Text("Электроэнергия: ${electricity.value} кВт/ч")
                     TextField(
                         value = electricity.value,
+                        singleLine = true,
                         onValueChange = { electricity.value = it },
                         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
                     )
